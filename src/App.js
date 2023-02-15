@@ -1,6 +1,7 @@
 import './App.css';
 import {useEffect, useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import MediaCard from './Components/CustomCard';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
       .then(pokemonData => {
         setCurrentId(pokemonData.id);
         setPokemon(pokemonData);
+        console.log(pokemonData);
 
         const types = pokemonData.types;
         setCurrentType(types.length);
@@ -75,14 +77,14 @@ function App() {
         (
           <div>
             {/* HeadContainer */}
-            <div>
+            {/* <div>
               <label>{pokemon.name}</label>
-            </div>
+            </div> */}
             
             {/* ScreenContainer */}
-            <div> 
+            {/* <div> 
               <img src={pokemon.sprites.front_default} className="App-logo" alt="logo" />
-            </div>
+            </div> */}
 
             {/* InfoContainer */}
             <div>
@@ -90,8 +92,16 @@ function App() {
               <button onClick={() => getPokemon(currentId + 1)}>Next</button>
               <br/>
               <h1>Details</h1>
+              <MediaCard 
+                pokemonImg={pokemon.sprites.front_default}
+                pokemonName={pokemon.name}
+                pokemonId={currentId}
+                pokemonLogo={pokemon.sprites.front_shiny}
+                pokemonAbilities={pokemon.abilities}
+                pokemonTypes={pokemon.types}
+              />
               
-              <div>
+              {/* <div>
                 <h3>Weight</h3>
                 <label>{pokemon.weight}</label>
               </div>
@@ -116,9 +126,9 @@ function App() {
                     </div>
                   ))
                 }
-              </div>
+              </div> */}
 
-              <div>
+              {/* <div>
                 <h3>Weakness: </h3>
                   <div>
                   {
@@ -139,7 +149,7 @@ function App() {
                     
                   }
                   </div>
-              </div>
+              </div> */}
 
             </div>
           </div>
