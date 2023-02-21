@@ -24,6 +24,9 @@
   color: white;
 }
 
+button{
+  cursor: pointer;
+}
 .App-link {
   color: #61dafb;
 }
