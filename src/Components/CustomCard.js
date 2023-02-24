@@ -18,18 +18,18 @@ export default function MediaCard({pokemonImg, pokemonName, pokemonId, pokemonLo
         }
         titleTypographyProps={{variant: 'h4', alig: 'left'}}
         title={pokemonName}
-        subheader=
-        {
-          <div>
-            {
-              pokemonTypes.map(item => (
-                <div key={uuidv4()} style={{fontWeight:'bold', float:'left', margin: '0 10px 0 10px'}}>
-                  <label style={{backgroundColor:'orange', padding:'3px', borderRadius:'5px'}}>{item.type.name}</label>
-                </div>
-              ))
-            }
-          </div>
-        } 
+        // subheader=
+        // {
+        //   <div>
+        //     {
+        //       pokemonTypes.map(item => (
+        //         <div key={uuidv4()} style={{fontWeight:'bold', float:'left', margin: '0 10px 0 10px'}}>
+        //           <label style={{backgroundColor:'orange', padding:'3px', borderRadius:'5px'}}>{item.type.name}</label>
+        //         </div>
+        //       ))
+        //     }
+        //   </div>
+        // } 
       />  
       <CardMedia
         sx={{ 

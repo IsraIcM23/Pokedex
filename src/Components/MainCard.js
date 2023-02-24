@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import MediaCard from './CustomCard';
 import { AppStats } from './Stats';
 import useCustomApi from './CustomApi';
+import HeaderComponent from './HeaderComponent';
 
 function MainCard() {
   
@@ -22,11 +23,11 @@ function MainCard() {
         setPokemon(pokemonData);
         setStats(pokemonData.stats);
 
-        var chartData = [];
-        stats.forEach(item => { 
-          chartData.push({label: item.stat.name, level: item.base_stat})
-        })
-        setChartData(chartData);
+        // var chartData = [];
+        // stats.forEach(item => { 
+        //   chartData.push({label: item.stat.name, level: item.base_stat})
+        // })
+        // setChartData(chartData);
         
 
         // console.log(pokemonData);
@@ -65,9 +66,11 @@ function MainCard() {
 
         setweaknesses(filteredDamage);
 
-        setTimeout(() => {
-          setIsLoading(false);  
-        }, 200);
+        setIsLoading(false);
+        
+        // setTimeout(() => {
+        //   setIsLoading(false);  
+        // }, 10);
         
     })
   }, [currentId]);
@@ -75,6 +78,7 @@ function MainCard() {
 
   return (
     <div className="App">
+      <HeaderComponent />
       
       <div className="App-header">
       
@@ -95,7 +99,7 @@ function MainCard() {
               </div>
               <div>
                 <MediaCard 
-                  // pokemonImg={pokemon.sprites.other.dream_world.front_default}
+                  //pokemonImg={pokemon.sprites.other.dream_world.front_default}
                   pokemonImg={pokemon.sprites.front_default}
                   pokemonName={pokemon.name}
                   pokemonId={currentId}
