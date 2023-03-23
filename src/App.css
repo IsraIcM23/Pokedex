@@ -24,6 +24,9 @@
   color: white;
 }
 
+button{
+  cursor: pointer;
+}
 .App-link {
   color: #61dafb;
 }
@@ -36,3 +39,18 @@
     transform: rotate(360deg);
   }
 }
+
+form{
+  width: 225px;
+  height: 960px;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+input{
+  margin-bottom: 20px;
+}
+a{
+  color:white;
+  text-decoration: none;
+}
+
