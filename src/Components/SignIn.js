@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState, useContext } from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -14,6 +15,12 @@ import '../../src/App.css'
 function SignIn(props) {
 
     const data = useContext(ThemeContext); 
+=======
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+function SignIn(props) {
+>>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
     //Routes
     const navigate = useNavigate();
     const pokedexPage = () => {
@@ -69,6 +76,7 @@ function SignIn(props) {
     // For Email:  not empty
     // For Password: not empty and greather than 8
     return (
+<<<<<<< HEAD
         <div className={data.theme}>
             <Header/>
             <title>{"Sign In"}</title>
@@ -84,6 +92,12 @@ function SignIn(props) {
                 <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me" />
                 <Button variant="contained" onClick={handleSubmit}>Log In</Button>
                 {/* <label>Email: </label>
+=======
+        <div>
+            <title>{"Sign In"}</title>
+            <form onSubmit={handleSubmit}>
+                <label>Email: </label>
+>>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
                 <input type={"email"}
                        value={email}
                        onChange={handleEmailInputChange} 
@@ -103,10 +117,15 @@ function SignIn(props) {
                     Remember me
                 </label>
                 <br></br>
+<<<<<<< HEAD
                 <input type="submit" value="Submit" /> */}
             </form>
             </Box>
             <Footer/>
+=======
+                <input type="submit" value="Submit" />
+            </form>
+>>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
         </div>
     )
 }
