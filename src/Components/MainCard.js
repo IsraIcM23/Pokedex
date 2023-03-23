@@ -1,14 +1,9 @@
 import '../App.css';
-<<<<<<< HEAD
 import {useEffect, useState, useContext} from 'react';
-=======
-import {useEffect, useState} from 'react';
->>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
 import MediaCard from './CustomCard';
 import { AppStats } from './Stats';
 import useCustomApi from './CustomApi';
 import HeaderComponent from './HeaderComponent';
-<<<<<<< HEAD
 import ThemeContext from "../Context/ThemeContext";
 import Header from "./Header";
 import Footer from './Footer';
@@ -17,15 +12,10 @@ import * as favoriteActions from '../redux/actions/favoriteActions';
 import PropTypes from 'prop-types';
 
 function MainCard({favorites}) {
-=======
-
-function MainCard() {
->>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
   
   const [pokeApiDomain, currentId, setCurrentId, pokemon, setPokemon, isLoading, setIsLoading, setCurrentType, doubleDamageFrom, setdoubleDamageFrom, halfDamageFrom, sethalfDamageFrom, weaknesses, setweaknesses, getPokemon] = useCustomApi();
   const [stats, setStats] = useState({});
   const [chartData, setChartData] = useState([]);  
-<<<<<<< HEAD
   const data = useContext(ThemeContext);
 
 
@@ -47,10 +37,6 @@ function MainCard() {
   // console.log("Llego del store",favorites);
   
 
-=======
-
-
->>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
   
   useEffect(() => {
 
@@ -116,7 +102,6 @@ function MainCard() {
 
 
   return (
-<<<<<<< HEAD
     // <div className="App">
     <div className={`${'App'} ${data.theme}`}>
 
@@ -137,11 +122,6 @@ function MainCard() {
       <Header/>
       {/* <HeaderComponent /> */}
 
-=======
-    <div className="App">
-      <HeaderComponent />
-      
->>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
       <div className="App-header">
       
       {
@@ -172,12 +152,9 @@ function MainCard() {
                   pokemonHight={pokemon.height}
                   pokemonWeaknesses={weaknesses}
                   chartData={chartData}
-<<<<<<< HEAD
                   favorites={favorites}
                   AddFav={AddFavorite}
                   RemFav={RemoveFavorite}
-=======
->>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
                 />
               </div>
               
@@ -191,15 +168,11 @@ function MainCard() {
       }  
       <br /><br />
       </div>
-<<<<<<< HEAD
       <Footer/>
-=======
->>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
     </div>
   );
 }
 
-<<<<<<< HEAD
 // export default MainCard;
 
 MainCard.propTypes = {
@@ -214,6 +187,3 @@ function mapStateToProps(state, ownProps) {
 }
 
 export default connect(mapStateToProps)(MainCard);
-=======
-export default MainCard;
->>>>>>> e73151dd56775442cdb08b323b6f08c07d8dc6d4
