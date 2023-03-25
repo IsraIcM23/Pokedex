@@ -5,6 +5,6 @@ const rootReducer = combineReducers({
   favorites
 });
 
-// console.log("ENTRO AL STORE");
+console.log("ENTRO AL STORE");
 
 export default rootReducer;

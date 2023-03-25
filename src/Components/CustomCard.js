@@ -22,7 +22,7 @@ export default function MediaCard({favorites, AddFav, RemFav, pokemonImg, pokemo
     <Card sx={{ minWidth: 400, backgroundColor:'#215F88' }}>
     {
       found ? (
-                <Avatar sx={{ float: 'right', margin:'5px', cursor:'pointer' }} onClick = {() => RemFav(pokemonId)}>
+                <Avatar sx={{ float: 'right', margin:'5px', cursor:'pointer', bgcolor: 'orange' }} onClick = {() => RemFav(pokemonId)}>
                   <StarIcon  />
                 </Avatar>
                 

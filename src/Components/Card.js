@@ -11,7 +11,7 @@ import { connect, useDispatch } from 'react-redux';
 import * as favoriteActions from '../redux/actions/favoriteActions';
 import PropTypes from 'prop-types';
 
-function MainCard({favorites}) {
+function MainCard({favorites, idpokemon}) {
   
   const [pokeApiDomain, currentId, setCurrentId, pokemon, setPokemon, isLoading, setIsLoading, setCurrentType, doubleDamageFrom, setdoubleDamageFrom, halfDamageFrom, sethalfDamageFrom, weaknesses, setweaknesses, getPokemon] = useCustomApi();
   const [stats, setStats] = useState({});
@@ -19,11 +19,11 @@ function MainCard({favorites}) {
   const data = useContext(ThemeContext);
 
   //Reduce
-  const [favorite, setfavorite] = useState({id: "", name: "", types:""});
+  const [favorite, setfavorite] = useState({id: ""});
   const dispatch = useDispatch();
 
-  function AddFavorite(idpokemon){
-    const newFavorite = { ...favorite, id:idpokemon, name: pokemon.name, types: pokemon.name};
+  function AddFavorite(id){
+    const newFavorite = { ...favorite, id:id };
     setfavorite(newFavorite);
     dispatch(favoriteActions.AddFavorite(favorite));
   }
@@ -32,16 +32,12 @@ function MainCard({favorites}) {
     dispatch(favoriteActions.DeleteFavorite(id));
   }
 
-  // const found = favorites.favorites.find(element => element.id==currentId);
-
-  // console.log("Llego del store",favorites);
-  
-
+  console.log(idpokemon);
   
   useEffect(() => {
 
     setIsLoading(true);
-    fetch(`${pokeApiDomain}${currentId}`)
+    fetch(`${pokeApiDomain}${idpokemon}`)
       .then(response => response.json())
       .then(pokemonData => {
         setCurrentId(pokemonData.id);
@@ -93,10 +89,6 @@ function MainCard({favorites}) {
 
         setIsLoading(false);
         
-        // setTimeout(() => {
-        //   setIsLoading(false);  
-        // }, 10);
-        
     })
   }, [currentId]);
 
@@ -105,22 +97,6 @@ function MainCard({favorites}) {
     // <div className="App">
     <div className={`${'App'} ${data.theme}`}>
 
-
-    {/* {
-      found ? (<input type="button" value="DeleteFavorite" onClick = {() => RemoveFavorite(currentId)}/>) 
-            : (<input type="button" value="AddFavorite" onClick = {() => AddFavorite(currentId)}/>)
-    } */}
-    
-    
-
-    {/* {
-      favorites.favorites.map(item => (
-          <div key={item.id}> {item.id} </div>
-      ))
-    } */}
-
-      <Header/>
-      {/* <HeaderComponent /> */}
 
       <div className="App-header">
       
@@ -136,9 +112,9 @@ function MainCard({favorites}) {
               boxShadow: '0 0 0 .2em black'
             }}>
               
-              <div style={{marginRight: '-23px', zIndex:1, display: 'flex', height: '25px', marginTop: '100%'}}>
+              {/* <div style={{marginRight: '-23px', zIndex:1, display: 'flex', height: '25px', marginTop: '100%'}}>
                 <button onClick={() => getPokemon(currentId - 1)} disabled={currentId <= 1} > {"<"} </button>
-              </div>
+              </div> */}
               <div>
                 <MediaCard 
                   //pokemonImg={pokemon.sprites.other.dream_world.front_default}
@@ -158,9 +134,9 @@ function MainCard({favorites}) {
                 />
               </div>
               
-              <div style={{marginLeft: '-23px', zIndex:1, display: 'flex', height: '25px',marginTop: '100%'}}>
+              {/* <div style={{marginLeft: '-23px', zIndex:1, display: 'flex', height: '25px',marginTop: '100%'}}>
                 <button onClick={() => getPokemon(currentId + 1)} disabled={currentId >= 150}> {">"}  </button>
-              </div>  
+              </div>   */}
 
             </div>
           </div>
@@ -168,7 +144,7 @@ function MainCard({favorites}) {
       }  
       <br /><br />
       </div>
-      <Footer/>
+
     </div>
   );
 }
