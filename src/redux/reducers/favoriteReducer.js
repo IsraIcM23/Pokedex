@@ -6,7 +6,7 @@ export default function favoriteReducer(state = [], action) {
 
       case "DELETE_FAVORITE":
         // console.log("Entro al reduce", "STATE:", state, "ACTION", action);
-        console.log("action.favorite:"+action.favorite);
+        // console.log("action.favorite:"+action.favorite);
         return state.filter(item => item.id !== action.favorite); 
 
       default:

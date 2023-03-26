@@ -15,20 +15,19 @@ import {useState} from 'react';
 export default function MediaCard({favorites, AddFav, RemFav, pokemonImg, pokemonName, pokemonId, pokemonLogo, pokemonAbilities, pokemonTypes, pokemonWeight, pokemonHight, pokemonWeaknesses, chartData}) {
     
   const found = favorites.favorites.find(item => item.id==pokemonId);
-
-    
+  
   return (
     
     <Card sx={{ minWidth: 400, backgroundColor:'#215F88' }}>
     {
       found ? (
-                <Avatar sx={{ float: 'right', margin:'5px', cursor:'pointer', bgcolor: 'orange' }} onClick = {() => RemFav(pokemonId)}>
+                <Avatar sx={{ float: 'right', margin:'5px', cursor:'pointer', bgcolor: 'orange' }} onClick = {() => RemFav()}>
                   <StarIcon  />
                 </Avatar>
                 
               ) 
             : (
-                <Avatar sx={{ float: 'right', margin:'5px', cursor:'pointer' }} onClick = {() => AddFav(pokemonId)}>
+                <Avatar sx={{ float: 'right', margin:'5px', cursor:'pointer' }} onClick = {() => AddFav()}>
                   <StarBorderIcon  />
                 </Avatar>
               )
@@ -41,9 +40,10 @@ export default function MediaCard({favorites, AddFav, RemFav, pokemonImg, pokemo
         }
         titleTypographyProps={{variant: 'h4', alig: 'left'}}
         title={pokemonName}
+        
         // subheader=
         // {
-        //   <div>
+        //     <div>
         //     {
         //       pokemonTypes.map(item => (
         //         <div key={uuidv4()} style={{fontWeight:'bold', float:'left', margin: '0 10px 0 10px'}}>
@@ -51,9 +51,10 @@ export default function MediaCard({favorites, AddFav, RemFav, pokemonImg, pokemo
         //         </div>
         //       ))
         //     }
-        //   </div>
+        //     </div>
         // } 
       />  
+      
       <CardMedia
         sx={{ 
             minHeight: '400px',

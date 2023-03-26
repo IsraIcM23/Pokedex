@@ -18,19 +18,21 @@ function MainCard({favorites}) {
   const [chartData, setChartData] = useState([]);  
   const data = useContext(ThemeContext);
 
+  const [DataType, setDataType] = useState([{name:'111'}]);  
+
   //Reduce
-  const [favorite, setfavorite] = useState({id: "", name: "", types:""});
+  const [favorite, setfavorite] = useState({id:'', name:'', types:''});
   const dispatch = useDispatch();
 
-  function AddFavorite(idpokemon){
-    const newFavorite = { ...favorite, id:idpokemon, name: pokemon.name, types: pokemon.name};
-    setfavorite(newFavorite);
-    dispatch(favoriteActions.AddFavorite(favorite));
+  function AddFavorite(){
+      setfavorite({ ...favorite, id:currentId, name: pokemon.name, types: pokemon.types});
+      dispatch(favoriteActions.AddFavorite(favorite));
   }
 
-  function RemoveFavorite(id){
-    dispatch(favoriteActions.DeleteFavorite(id));
+  function RemoveFavorite(){
+    dispatch(favoriteActions.DeleteFavorite(currentId));
   }
+
 
   // const found = favorites.favorites.find(element => element.id==currentId);
 
@@ -44,16 +46,28 @@ function MainCard({favorites}) {
     fetch(`${pokeApiDomain}${currentId}`)
       .then(response => response.json())
       .then(pokemonData => {
-        setCurrentId(pokemonData.id);
-        setPokemon(pokemonData);
-        setStats(pokemonData.stats);
-
-        // var chartData = [];
-        // stats.forEach(item => { 
-        //   chartData.push({label: item.stat.name, level: item.base_stat})
-        // })
-        // setChartData(chartData);
         
+
+        setTimeout(() => {
+
+          setCurrentId(pokemonData.id);
+          setPokemon(pokemonData);
+          setStats(pokemonData.stats);
+
+          var chartData = [];
+          stats.forEach(item => { 
+            chartData.push({label: item.stat.name, level: item.base_stat})
+          })
+          setChartData(chartData); 
+
+          var DataType = [];
+          pokemon.types.forEach(item => { 
+            DataType.push({name: item.type.name})
+          })
+          setDataType(DataType); 
+        
+        }, 100);
+  
 
         // console.log(pokemonData);
         const types = pokemonData.types;
@@ -90,7 +104,6 @@ function MainCard({favorites}) {
         });
 
         setweaknesses(filteredDamage);
-
         setIsLoading(false);
         
         // setTimeout(() => {
@@ -102,28 +115,14 @@ function MainCard({favorites}) {
 
 
   return (
-    // <div className="App">
+
     <div className={`${'App'} ${data.theme}`}>
-
-
-    {/* {
-      found ? (<input type="button" value="DeleteFavorite" onClick = {() => RemoveFavorite(currentId)}/>) 
-            : (<input type="button" value="AddFavorite" onClick = {() => AddFavorite(currentId)}/>)
-    } */}
-    
-    
-
-    {/* {
-      favorites.favorites.map(item => (
-          <div key={item.id}> {item.id} </div>
-      ))
-    } */}
+      
 
       <Header/>
-      {/* <HeaderComponent /> */}
 
       <div className="App-header">
-      
+
       {
         isLoading ? (<></>) : 
         (
@@ -135,11 +134,12 @@ function MainCard({favorites}) {
               borderRadius: '5px',
               boxShadow: '0 0 0 .2em black'
             }}>
-              
+
               <div style={{marginRight: '-23px', zIndex:1, display: 'flex', height: '25px', marginTop: '100%'}}>
                 <button onClick={() => getPokemon(currentId - 1)} disabled={currentId <= 1} > {"<"} </button>
               </div>
               <div>
+              
                 <MediaCard 
                   //pokemonImg={pokemon.sprites.other.dream_world.front_default}
                   pokemonImg={pokemon.sprites.front_default}

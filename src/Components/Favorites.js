@@ -13,11 +13,22 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 function Favorites({favorites}) {
     const data = useContext(ThemeContext); 
     const [ FavoriteData, SetFavoriteData ] = useState([]);
+    
+    
+    let hash = {};
+    var favoritesPokemons = favorites.favorites.filter(item => hash[item.id] ? false : hash[item.id] = true);
 
     useEffect(() => {
       var FavoriteData = [];
-      for(let i=0; i < favorites.favorites.length; i++) {
-        FavoriteData.push(favorites.favorites[i])
+      for(let i=0; i < favoritesPokemons.length; i++) {
+  
+        var Types = [];
+        for (let index = 0; index < favoritesPokemons[i].types.length; index++) {
+          Types.push(favoritesPokemons[i].types[index].type.name);
+        }
+        
+
+        FavoriteData.push({id:favoritesPokemons[i].id, name:favoritesPokemons[i].name, types:Types});
       }
       SetFavoriteData(FavoriteData);
     }, []);
