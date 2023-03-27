@@ -21,14 +21,15 @@ function Favorites({favorites}) {
     useEffect(() => {
       var FavoriteData = [];
       for(let i=0; i < favoritesPokemons.length; i++) {
-  
-        var Types = [];
-        for (let index = 0; index < favoritesPokemons[i].types.length; index++) {
-          Types.push(favoritesPokemons[i].types[index].type.name);
+        
+        if(favoritesPokemons[i]){
+          var Types = [];
+          for (let index = 0; index < favoritesPokemons[i].types.length; index++) {
+            Types.push(favoritesPokemons[i].types[index].type.name);
+          }
+          FavoriteData.push({id:favoritesPokemons[i].id, name:favoritesPokemons[i].name, types:Types});
         }
         
-
-        FavoriteData.push({id:favoritesPokemons[i].id, name:favoritesPokemons[i].name, types:Types});
       }
       SetFavoriteData(FavoriteData);
     }, []);

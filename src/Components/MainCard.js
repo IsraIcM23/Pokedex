@@ -15,10 +15,8 @@ function MainCard({favorites}) {
   
   const [pokeApiDomain, currentId, setCurrentId, pokemon, setPokemon, isLoading, setIsLoading, setCurrentType, doubleDamageFrom, setdoubleDamageFrom, halfDamageFrom, sethalfDamageFrom, weaknesses, setweaknesses, getPokemon] = useCustomApi();
   const [stats, setStats] = useState({});
-  const [chartData, setChartData] = useState([]);  
+  const [chartData, setChartData] = useState([]); 
   const data = useContext(ThemeContext);
-
-  const [DataType, setDataType] = useState([{name:'111'}]);  
 
   //Reduce
   const [favorite, setfavorite] = useState({id:'', name:'', types:''});
@@ -26,20 +24,18 @@ function MainCard({favorites}) {
 
   function AddFavorite(){
       setfavorite({ ...favorite, id:currentId, name: pokemon.name, types: pokemon.types});
-      dispatch(favoriteActions.AddFavorite(favorite));
   }
 
   function RemoveFavorite(){
     dispatch(favoriteActions.DeleteFavorite(currentId));
   }
 
-
-  // const found = favorites.favorites.find(element => element.id==currentId);
-
-  // console.log("Llego del store",favorites);
+  useEffect(() => {
+    dispatch(favoriteActions.AddFavorite(favorite));
+  }, [favorite])
   
 
-  
+
   useEffect(() => {
 
     setIsLoading(true);
@@ -55,19 +51,14 @@ function MainCard({favorites}) {
           setStats(pokemonData.stats);
 
           var chartData = [];
-          stats.forEach(item => { 
+          stats?.forEach(item => { 
             chartData.push({label: item.stat.name, level: item.base_stat})
           })
           setChartData(chartData); 
-
-          var DataType = [];
-          pokemon.types.forEach(item => { 
-            DataType.push({name: item.type.name})
-          })
-          setDataType(DataType); 
         
         }, 100);
   
+        
 
         // console.log(pokemonData);
         const types = pokemonData.types;
@@ -141,7 +132,6 @@ function MainCard({favorites}) {
               <div>
               
                 <MediaCard 
-                  //pokemonImg={pokemon.sprites.other.dream_world.front_default}
                   pokemonImg={pokemon.sprites.front_default}
                   pokemonName={pokemon.name}
                   pokemonId={currentId}
