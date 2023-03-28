@@ -1,20 +1,18 @@
 import { createContext } from 'react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 
 const ThemeContext = createContext();
-const initialTheme = 'light';
+var initialTheme = '';
 
 const ThemeProvider = ({ children }) => {
   
+  initialTheme = localStorage.getItem("themeStatus")=="true" ? 'dark' : 'light';
   const [theme, setTheme] = useState(initialTheme);
 
   const handleTheme = (e) => {
-    // console.log(e.target.checked);
-    if (e.target.checked) {
-      setTheme('light');
-    } else {
-      setTheme('dark');
-    }
+    localStorage.setItem("themeStatus", e.target.checked);
+    localStorage.getItem("themeStatus")=="true" ? setTheme('dark') : setTheme('light');
   };
 
   const data = {theme, handleTheme};
