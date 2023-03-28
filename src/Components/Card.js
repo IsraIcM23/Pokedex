@@ -3,15 +3,12 @@ import {useEffect, useState, useContext} from 'react';
 import MediaCard from './CustomCard';
 import { AppStats } from './Stats';
 import useCustomApi from './CustomApi';
-import HeaderComponent from './HeaderComponent';
 import ThemeContext from "../Context/ThemeContext";
-import Header from "./Header";
-import Footer from './Footer';
 import { connect, useDispatch } from 'react-redux';
 import * as favoriteActions from '../redux/actions/favoriteActions';
 import PropTypes from 'prop-types';
 
-function MainCard({favorites, idpokemon}) {
+function Card({favorites, idpokemon}) {
   
   const [pokeApiDomain, currentId, setCurrentId, pokemon, setPokemon, isLoading, setIsLoading, setCurrentType, doubleDamageFrom, setdoubleDamageFrom, halfDamageFrom, sethalfDamageFrom, weaknesses, setweaknesses, getPokemon] = useCustomApi();
   const [stats, setStats] = useState({});
@@ -32,7 +29,6 @@ function MainCard({favorites, idpokemon}) {
     dispatch(favoriteActions.DeleteFavorite(id));
   }
 
-  console.log(idpokemon);
   
   useEffect(() => {
 
@@ -44,11 +40,11 @@ function MainCard({favorites, idpokemon}) {
         setPokemon(pokemonData);
         setStats(pokemonData.stats);
 
-        // var chartData = [];
-        // stats.forEach(item => { 
-        //   chartData.push({label: item.stat.name, level: item.base_stat})
-        // })
-        // setChartData(chartData);
+        var chartData = [];
+        stats?.forEach(item => { 
+          chartData.push({label: item.stat.name, level: item.base_stat})
+        })
+        setChartData(chartData);
         
 
         // console.log(pokemonData);
@@ -90,15 +86,14 @@ function MainCard({favorites, idpokemon}) {
         setIsLoading(false);
         
     })
-  }, [currentId]);
+  }, [idpokemon]);
 
 
   return (
-    // <div className="App">
-    <div className={`${'App'} ${data.theme}`}>
+    <div>
 
 
-      <div className="App-header">
+      <div>
       
       {
         isLoading ? (<></>) : 
@@ -108,16 +103,12 @@ function MainCard({favorites, idpokemon}) {
             <div style={{
               display: 'flex',
               flexDirection: 'row',
-              borderRadius: '5px',
-              boxShadow: '0 0 0 .2em black'
+              marginLeft:'60%',
+              padding:'25px'
             }}>
               
-              {/* <div style={{marginRight: '-23px', zIndex:1, display: 'flex', height: '25px', marginTop: '100%'}}>
-                <button onClick={() => getPokemon(currentId - 1)} disabled={currentId <= 1} > {"<"} </button>
-              </div> */}
               <div>
                 <MediaCard 
-                  //pokemonImg={pokemon.sprites.other.dream_world.front_default}
                   pokemonImg={pokemon.sprites.front_default}
                   pokemonName={pokemon.name}
                   pokemonId={currentId}
@@ -133,16 +124,11 @@ function MainCard({favorites, idpokemon}) {
                   RemFav={RemoveFavorite}
                 />
               </div>
-              
-              {/* <div style={{marginLeft: '-23px', zIndex:1, display: 'flex', height: '25px',marginTop: '100%'}}>
-                <button onClick={() => getPokemon(currentId + 1)} disabled={currentId >= 150}> {">"}  </button>
-              </div>   */}
-
+            
             </div>
           </div>
         )
       }  
-      <br /><br />
       </div>
 
     </div>
@@ -151,7 +137,7 @@ function MainCard({favorites, idpokemon}) {
 
 // export default MainCard;
 
-MainCard.propTypes = {
+Card.propTypes = {
   favorites: PropTypes.array
 }
 
@@ -162,4 +148,4 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-export default connect(mapStateToProps)(MainCard);
+export default connect(mapStateToProps)(Card);

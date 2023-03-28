@@ -8,12 +8,17 @@ import PropTypes from 'prop-types';
 import ThemeContext from "../Context/ThemeContext";
 import * as React from 'react';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import Card from './Card';
 
 
 function Favorites({favorites}) {
     const data = useContext(ThemeContext); 
     const [ FavoriteData, SetFavoriteData ] = useState([]);
+    const [pokemonid, setpokemonid] = useState(2);
     
+    const addpokemonid = (params) => {
+      setpokemonid(params.id);
+    }
     
     let hash = {};
     var favoritesPokemons = favorites.favorites.filter(item => hash[item.id] ? false : hash[item.id] = true);
@@ -46,16 +51,15 @@ function Favorites({favorites}) {
     return (
         <div className={data.theme}>
             <Header/>
-            <h1>Favorites</h1>
-            <div style={{ height: 860, width: '100%' }}>
-              <DataGrid rows={rows} columns={columns} />
+            <div style={{ height: 800, width: '40%', float: 'left', paddingBottom: '100px', cursor:'pointer' }}>
+              <h1><b>Favorites</b></h1>
+              <DataGrid 
+                rows={rows} 
+                columns={columns} 
+                onRowClick={addpokemonid}
+              />
             </div>
-            {/* {
-                favorites.favorites.map(item => (
-                    <div key={item.id}> {item.id} </div>
-                ))
-            } */}
-            
+            <Card idpokemon={pokemonid}/>
             <Footer/>
         </div>
       );
