@@ -37,7 +37,7 @@ function Favorites({favorites}) {
         
       }
       SetFavoriteData(FavoriteData);
-    }, [[],favorites]);
+    }, [favorites]);
 
  
     const rows: GridRowsProp = FavoriteData;
