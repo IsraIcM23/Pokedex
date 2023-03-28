@@ -19,15 +19,17 @@ function Card({favorites, idpokemon}) {
   const [favorite, setfavorite] = useState({id: ""});
   const dispatch = useDispatch();
 
-  function AddFavorite(id){
-    const newFavorite = { ...favorite, id:id };
-    setfavorite(newFavorite);
-    dispatch(favoriteActions.AddFavorite(favorite));
+  function AddFavorite(){
+    setfavorite({ ...favorite, id:currentId, name: pokemon.name, types: pokemon.types});
   }
 
-  function RemoveFavorite(id){
-    dispatch(favoriteActions.DeleteFavorite(id));
+  function RemoveFavorite(){
+    dispatch(favoriteActions.DeleteFavorite(currentId));
   }
+
+  useEffect(() => {
+    dispatch(favoriteActions.AddFavorite(favorite));
+  }, [favorite])
 
   
   useEffect(() => {
